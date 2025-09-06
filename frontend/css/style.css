@@ -1,0 +1,9 @@
+:root {
+  --bg-color: rgba(25,25,25, 1)
+}
+
+html, body, * {
+  padding: 0;
+  margin: 0;
+  box-sizing: border-box;
+}
