@@ -1,4 +1,4 @@
-import dashboard from "./views/dashboard.js";
+import home from "./render/Home/home.js";
 
 const regexPath = (path) =>
   new RegExp("^" + path.replace(/\//g, "\\/").replace(/:\w+/g, "(.+)") + "$");
@@ -24,7 +24,7 @@ const navigator = (url) => {
 
 const router = async () => {
   const routes = [
-    { path: "/", view: dashboard },
+    { path: "/", view: home },
     // { path: "/facebook", view: () => console.log("View is loaded") },
     // { path: "/tiktok", view: () => console.log("View is loaded") },
     // { path: "/telegram", view: () => console.log("View is loaded") },
@@ -47,13 +47,17 @@ const router = async () => {
 
   const view = new match.route.view(getParams(match));
 
-  document.querySelector("#app").innerHTML = await view.getHtml();
-  console.log(match);
+  document.querySelector("#main").innerHTML = await view.getHtml();
 };
 
 window.addEventListener("popstate", router);
 
-document.addEventListener("DOMContentLoaded", () => {
+document.addEventListener("DOMContentLoaded", async () => {
+  // Inject menu bar once
+  const menuResponse = await fetch("/static/Menu/index.html");
+  const menuHtml = await menuResponse.text();
+  document.getElementById("menu").innerHTML = menuHtml;
+
   // listent for navigation and handling reload
   document.body.addEventListener("click", (event) => {
     if (event.target.match("[data-link]")) {

@@ -1,0 +1,21 @@
+:root {
+  --bg-color: rgb(6, 3, 10);
+}
+
+html, body, * {
+  padding: 0;
+  margin: 0;
+  box-sizing: border-box;
+}
+
+/* main layout */
+.container {
+  width: 100vw;
+  height: 100vh;
+  /* background-color: var(--bg-color); */
+
+  overflow: hidden;
+  display: grid;
+  grid-template-columns: 1fr (100% - 1fr);
+}
+

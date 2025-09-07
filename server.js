@@ -1,16 +1,15 @@
 const express = require("express");
 const path = require("path");
-const fs = require("fs");
 
 const server = express();
 const port = process.env.PORT || 3002;
 
 server.use(
-  "/script",
-  express.static(path.resolve(__dirname, "frontend", "script"))
+  "/static",
+  express.static(path.resolve(__dirname, "frontend", "static"))
 );
 
-server.get(/^\/(?!script).*/, (req, res) => {
+server.get(/^\/(?!static).*/, (req, res) => {
   res.sendFile(path.resolve(__dirname, "frontend", "index.html"));
 });
 
